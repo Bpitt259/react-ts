@@ -1,19 +1,30 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import getData from "./api/getData";
+import fetchData from "./api/fetchData";
 
 function App() {
-  const [data, setData] = useState<any>(null);
-  const url = "https://api.github.com/users/github";
+  const [data, setData] = useState<any>("");
+  const url = "https://dummyjson.com/products/1";
 
   useEffect(() => {
-    setData(getData(url));
+    async function getData() {
+      try {
+        const books = await fetchData(url);
+        setData(books);
+      } catch (err) {
+        console.log("Error occured when fetching books");
+      }
+    }
+    getData();
   }, []);
 
+  console.log(data);
   return (
     <div className="App">
-      <header className="App-header">header</header>
-      <main>{data}</main>
+      <main>
+        <div>{data.brand}</div>
+        <div>{data.title}</div>
+      </main>
     </div>
   );
 }

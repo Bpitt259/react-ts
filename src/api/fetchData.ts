@@ -1,10 +1,9 @@
 import fetch from "node-fetch";
 
-const getData = async (url: string) => {
+const fetchData = async (url: string) => {
   const response = await fetch(url);
   const data = await response.json();
-
-  console.log(data);
+  return data;
 };
 
-export default getData;
+export default fetchData;
